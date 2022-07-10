@@ -20,11 +20,18 @@ class _$AppRouter extends RootStackRouter {
     SignInRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
           routeData: routeData, child: const SignInPage());
+    },
+    RegisterRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: const RegisterPage());
     }
   };
 
   @override
-  List<RouteConfig> get routes => [RouteConfig(SignInRoute.name, path: '/')];
+  List<RouteConfig> get routes => [
+        RouteConfig(SignInRoute.name, path: '/'),
+        RouteConfig(RegisterRoute.name, path: '/register')
+      ];
 }
 
 /// generated route for
@@ -33,4 +40,12 @@ class SignInRoute extends PageRouteInfo<void> {
   const SignInRoute() : super(SignInRoute.name, path: '/');
 
   static const String name = 'SignInRoute';
+}
+
+/// generated route for
+/// [RegisterPage]
+class RegisterRoute extends PageRouteInfo<void> {
+  const RegisterRoute() : super(RegisterRoute.name, path: '/register');
+
+  static const String name = 'RegisterRoute';
 }

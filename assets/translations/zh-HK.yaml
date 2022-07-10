@@ -3,3 +3,7 @@ title:
   sign_in: Sign in to Aholic
 message:
   splash: Next-Gen Life Organizer
+label:
+  email: Email
+  password: Password
+  create_account: Create Account

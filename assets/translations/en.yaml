@@ -1,8 +1,16 @@
 app_name: Aholic
 title:
   sign_in: Sign in to Aholic
+  register_email: What's your email?
+  register_password: Enter a password
+  register_verify_email: Verify your email
 message:
   splash: Next-Gen Life Organizer
+  register_password: We'll use the password to encrypt your keys. Please keep it safe and secure.
+  register_verify_email: We've sent a verification email to {email}
 label:
   email: Email
   password: Password
+  create_account: Create Account
+  open_mail_app: Open Mail App
+  resend_email: Resend Email

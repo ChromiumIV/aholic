@@ -56,45 +56,52 @@ class _AhlTextFieldState extends State<AhlTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: widget.padding,
-      child: Focus(
-        onFocusChange: (hasFocus) {
-          if (hasFocus && widget.selectAllOnFocus) {
-            _controller.selection = TextSelection(
-                baseOffset: 0, extentOffset: _controller.text.length);
-          }
-          setState(() {
-            _isFocused = hasFocus;
-          });
-        },
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          decoration: BoxDecoration(
-            color: widget.fillColor,
-            borderRadius: const BorderRadius.all(Radius.circular(8)),
-            border: Border.all(
-              color: _isFocused ? widget.textColor : widget.fillColor,
+    return Material(
+      color: Colors.transparent,
+      child: Padding(
+        padding: widget.padding,
+        child: Focus(
+          onFocusChange: (hasFocus) {
+            if (hasFocus && widget.selectAllOnFocus) {
+              _controller.selection = TextSelection(
+                  baseOffset: 0, extentOffset: _controller.text.length);
+            }
+            setState(() {
+              _isFocused = hasFocus;
+            });
+          },
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            decoration: BoxDecoration(
+              color: widget.fillColor,
+              borderRadius: const BorderRadius.all(Radius.circular(8)),
+              border: Border.all(
+                color: _isFocused ? widget.textColor : widget.fillColor,
+              ),
             ),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(left: 16),
-            child: TextField(
-              autofocus: widget.autofocus,
-              controller: _controller,
-              cursorColor: widget.textColor,
-              decoration: InputDecoration(
-                counterText: '',
-                hintText: _isFocused ? '' : widget.hintText,
-                hintStyle: Theme.of(context)
+            child: Padding(
+              padding: const EdgeInsets.only(left: 16),
+              child: TextField(
+                autofocus: widget.autofocus,
+                controller: _controller,
+                cursorColor: widget.textColor,
+                style: Theme.of(context)
                     .textTheme
                     .bodyText1
-                    ?.copyWith(color: widget.hintColor),
-                border: InputBorder.none,
+                    ?.copyWith(color: widget.textColor),
+                decoration: InputDecoration(
+                  counterText: '',
+                  hintText: _isFocused ? '' : widget.hintText,
+                  hintStyle: Theme.of(context)
+                      .textTheme
+                      .bodyText1
+                      ?.copyWith(color: widget.hintColor),
+                  border: InputBorder.none,
+                ),
+                obscureText: widget.obscureText,
+                enabled: widget.isEnabled,
+                onChanged: widget.onTextChanged,
               ),
-              obscureText: widget.obscureText,
-              enabled: widget.isEnabled,
-              onChanged: widget.onTextChanged,
             ),
           ),
         ),
