@@ -33,13 +33,15 @@ class _AppWidgetState extends ConsumerState<AppWidget> {
         // highlightColor: Colors.transparent,
         textTheme: const TextTheme(
           headline1: TextStyle(
-              fontSize: 24.0,
-              fontWeight: FontWeight.w700,
-              color: AhlColors.primary),
+            fontSize: 24.0,
+            fontWeight: FontWeight.w700,
+            color: AhlColors.primary,
+          ),
           bodyText1: TextStyle(
-              fontSize: 14.0,
-              fontWeight: FontWeight.w500,
-              color: AhlColors.primary),
+            fontSize: 14.0,
+            fontWeight: FontWeight.w700,
+            color: AhlColors.primary,
+          ),
         ),
       ),
       routerDelegate: appRouter.delegate(

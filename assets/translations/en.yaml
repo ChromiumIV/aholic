@@ -6,7 +6,7 @@ title:
   register_verify_email: Verify your email
 message:
   splash: Next-Gen Life Organizer
-  register_password: We'll use the password to encrypt your keys. Please keep it safe and secure.
+  register_password: We'll use your password to encrypt your keys. Please keep it safe and secure.
   register_verify_email: We've sent a verification email to {email}
 label:
   email: Email

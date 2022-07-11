@@ -8,6 +8,8 @@ class AhlColors {
   static const Color primary20 = Color(0xFFECF1FA);
   static const Color primary10 = Color(0xFFF6F9FD);
 
+  static const Color primaryA20 = Color(0x330E2241);
+
   static const Color yellow = Color(0xFFFDD548);
   static const Color orange = Color(0xFFFFAC7D);
   static const Color red = Color(0xFFFC9385);

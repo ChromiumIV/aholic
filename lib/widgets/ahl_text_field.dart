@@ -76,7 +76,8 @@ class _AhlTextFieldState extends State<AhlTextField> {
               color: widget.fillColor,
               borderRadius: const BorderRadius.all(Radius.circular(8)),
               border: Border.all(
-                color: _isFocused ? widget.textColor : widget.fillColor,
+                color: _isFocused ? widget.textColor : Colors.transparent,
+                width: 2,
               ),
             ),
             child: Padding(
