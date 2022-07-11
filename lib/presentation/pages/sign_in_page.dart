@@ -49,6 +49,7 @@ class _SignInPageState extends ConsumerState<SignInPage> {
                   AhlTextField(
                     hintText: 'label.password'.tr(),
                     obscureText: true,
+                    padding: const EdgeInsets.only(bottom: 24),
                   ),
                   const Align(
                     alignment: Alignment.centerRight,

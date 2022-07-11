@@ -24,20 +24,27 @@ class _$AppRouter extends RootStackRouter {
     RegisterRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
           routeData: routeData, child: const RegisterPage());
+    },
+    MainRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: const MainPage());
     }
   };
 
   @override
   List<RouteConfig> get routes => [
-        RouteConfig(SignInRoute.name, path: '/'),
-        RouteConfig(RegisterRoute.name, path: '/register')
+        RouteConfig('/#redirect',
+            path: '/', redirectTo: '/main', fullMatch: true),
+        RouteConfig(SignInRoute.name, path: '/login'),
+        RouteConfig(RegisterRoute.name, path: '/register'),
+        RouteConfig(MainRoute.name, path: '/main')
       ];
 }
 
 /// generated route for
 /// [SignInPage]
 class SignInRoute extends PageRouteInfo<void> {
-  const SignInRoute() : super(SignInRoute.name, path: '/');
+  const SignInRoute() : super(SignInRoute.name, path: '/login');
 
   static const String name = 'SignInRoute';
 }
@@ -48,4 +55,12 @@ class RegisterRoute extends PageRouteInfo<void> {
   const RegisterRoute() : super(RegisterRoute.name, path: '/register');
 
   static const String name = 'RegisterRoute';
+}
+
+/// generated route for
+/// [MainPage]
+class MainRoute extends PageRouteInfo<void> {
+  const MainRoute() : super(MainRoute.name, path: '/main');
+
+  static const String name = 'MainRoute';
 }

@@ -40,6 +40,7 @@ dependencies:
   easy_localization_loader: ^1.0.0
   yaml: ^3.1.1
   auto_route: ^4.2.0
+  collection: ^1.16.0
 
 dev_dependencies:
   flutter_test:
