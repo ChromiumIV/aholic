@@ -1,3 +1,4 @@
+import 'package:aholic/extension/datetime_extension.dart';
 import 'package:aholic/widgets/ahl_animated_container.dart';
 import 'package:aholic/widgets/ahl_icon_button.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -76,14 +77,20 @@ class _AhlDatePickerBottomSheetState extends State<AhlDatePickerBottomSheet> {
             ExpandablePageView.builder(
               controller: _pageController,
               itemCount: 4801,
-              itemBuilder: (_, index) {
+              itemBuilder: (context, index) {
                 final now = DateTime.now();
                 final visibleDate =
                     DateTime(now.year, now.month + (index - 2400), 1);
-                // setState(() {
-                //   _visibleDate = visibleDate;
-                // });
-                return _buildMonthView(context, visibleDate);
+
+                return _buildMonthView(context, visibleDate, _selectedDate);
+              },
+              onPageChanged: (index) {
+                final now = DateTime.now();
+                final visibleDate =
+                    DateTime(now.year, now.month + (index - 2400), 1);
+                setState(() {
+                  _visibleDate = visibleDate;
+                });
               },
             ),
           ],
@@ -92,19 +99,62 @@ class _AhlDatePickerBottomSheetState extends State<AhlDatePickerBottomSheet> {
     );
   }
 
-  Widget _buildMonthView(BuildContext context, DateTime month) {
+  Widget _buildMonthView(
+      BuildContext context, DateTime visibleDate, DateTime selectedDate) {
     final rows = <Widget>[];
 
-    final dayButtonSize = (MediaQuery.of(context).size.width - 46) / 7;
+    final dayButtonSize = (MediaQuery.of(context).size.width - 60) / 7;
 
-    return Column(
-      children: [
-        _buildSelectedDayButton(12, dayButtonSize),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 12),
-          child: _buildWeekRow(),
-        )
-      ],
+    final firstDay = DateTime(visibleDate.year, visibleDate.month, 1);
+    final lastDay = DateTime(visibleDate.year, visibleDate.month + 1, 1)
+        .add(const Duration(days: -1));
+
+    final numOfPrecedingInactiveDays = firstDay.weekday % 7;
+    final numOfTrailingInactiveDays = 6 - lastDay.weekday % 7;
+
+    final firstVisibleDay =
+        firstDay.add(Duration(days: -1 * numOfPrecedingInactiveDays));
+    final lastVisibleDay =
+        lastDay.add(Duration(days: numOfTrailingInactiveDays));
+
+    var currentDate = firstVisibleDay;
+    var row = <Widget>[];
+
+    do {
+      final dayButton = selectedDate.isSameDate(currentDate)
+          ? _buildSelectedDayButton(currentDate.day, dayButtonSize)
+          : visibleDate.month != currentDate.month
+              ? _buildInactiveDayButton(currentDate.day, dayButtonSize)
+              : _buildActiveDayButton(currentDate.day, dayButtonSize);
+      row.add(dayButton);
+
+      if (row.length == 7) {
+        rows.add(SizedBox(
+          width: MediaQuery.of(context).size.width - 32,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: row,
+          ),
+        ));
+        row = <Widget>[];
+      }
+
+      currentDate = currentDate.add(const Duration(days: 1));
+    } while (!currentDate.isAfter(lastVisibleDay));
+
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 12),
+              child: _buildWeekRow(),
+            ),
+            ...rows,
+          ],
+        ),
+      ),
     );
   }
 
@@ -175,7 +225,8 @@ class _AhlDatePickerBottomSheetState extends State<AhlDatePickerBottomSheet> {
         builder: (isPressed) => Text(
           day.toString(),
           style: Theme.of(context).textTheme.bodyText1?.copyWith(
-              color: isPressed ? widget.hoverTextColor : widget.textColor),
+                color: isPressed ? widget.hoverTextColor : widget.textColor,
+              ),
         ),
         decorationBuilder: (isPressed) => BoxDecoration(
           color: isPressed ? widget.textColor : widget.fillColor,
@@ -195,10 +246,11 @@ class _AhlDatePickerBottomSheetState extends State<AhlDatePickerBottomSheet> {
         builder: (isPressed) => Text(
           day.toString(),
           style: Theme.of(context).textTheme.bodyText1?.copyWith(
-              color: isPressed ? widget.hoverTextColor : widget.textColor),
+                color: isPressed ? Colors.white : AhlColors.primary,
+              ),
         ),
         decorationBuilder: (isPressed) => BoxDecoration(
-          color: isPressed ? widget.textColor : widget.fillColor,
+          color: isPressed ? AhlColors.primary : Colors.white,
           borderRadius: BorderRadius.circular(999),
         ),
       ),
@@ -214,12 +266,14 @@ class _AhlDatePickerBottomSheetState extends State<AhlDatePickerBottomSheet> {
         alignment: Alignment.center,
         builder: (isPressed) => Text(
           day.toString(),
-          style: Theme.of(context).textTheme.bodyText1?.copyWith(
-              color: isPressed ? widget.hoverTextColor : widget.textColor),
+          style: Theme.of(context)
+              .textTheme
+              .bodyText1
+              ?.copyWith(color: isPressed ? Colors.white : AhlColors.primary40),
         ),
         decorationBuilder: (isPressed) => BoxDecoration(
-          color: isPressed ? widget.textColor : widget.fillColor,
-          borderRadius: BorderRadius.circular(99),
+          color: isPressed ? AhlColors.primary40 : Colors.white,
+          borderRadius: BorderRadius.circular(999),
         ),
       ),
     );
