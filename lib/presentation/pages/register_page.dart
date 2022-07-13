@@ -3,13 +3,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../providers.dart';
 import '../../theme/ahl_colors.dart';
 import '../../widgets/ahl_button.dart';
 import '../../widgets/ahl_icon_button.dart';
 import '../../widgets/ahl_page_indicator.dart';
+import '../../widgets/ahl_scaffold.dart';
 import '../../widgets/ahl_text_field.dart';
-import '../router/app_router.dart';
 
 class RegisterPage extends ConsumerStatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -25,78 +24,75 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: GestureDetector(
-        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-        child: Hero(
-          tag: 'createAccountContainer',
-          child: Container(
-            color: AhlColors.orange,
-            child: SafeArea(
-              child: Column(
-                children: [
-                  Expanded(
-                    child: ScrollConfiguration(
-                      behavior: NonGlowingScrollBehavior(),
-                      child: PageView(
-                        controller: _pageController,
-                        physics: const NeverScrollableScrollPhysics(),
-                        onPageChanged: (page) {
-                          setState(() {
-                            _currentPage = page;
-                          });
-                        },
-                        children: [
-                          _buildEmailPage(),
-                          _buildPasswordPage(),
-                          _buildVerifyEmailPage(),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
-                    child: Row(
+    return AhlScaffold(
+      body: Hero(
+        tag: 'createAccountContainer',
+        child: Container(
+          color: AhlColors.orange,
+          child: SafeArea(
+            child: Column(
+              children: [
+                Expanded(
+                  child: ScrollConfiguration(
+                    behavior: NonGlowingScrollBehavior(),
+                    child: PageView(
+                      controller: _pageController,
+                      physics: const NeverScrollableScrollPhysics(),
+                      onPageChanged: (page) {
+                        setState(() {
+                          _currentPage = page;
+                        });
+                      },
                       children: [
-                        AhlIconButton(
-                          icon: Icons.chevron_left,
-                          fillColor: Colors.white.withOpacity(0.5),
-                          iconColor: AhlColors.darkOrange,
-                          hoverIconColor: Colors.white,
-                          onTap: () {
-                            _pageController.previousPage(
-                                duration: const Duration(milliseconds: 200),
-                                curve: Curves.easeInOut);
-                          },
-                        ),
-                        Expanded(
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: AhlPageIndicator(
-                              currentItem: _currentPage,
-                              itemCount: 3,
-                              activeColor: AhlColors.darkOrange,
-                              inactiveColor:
-                                  AhlColors.darkOrange.withOpacity(0.2),
-                            ),
-                          ),
-                        ),
-                        AhlIconButton(
-                          icon: Icons.chevron_right,
-                          fillColor: Colors.white.withOpacity(0.5),
-                          iconColor: AhlColors.darkOrange,
-                          hoverIconColor: Colors.white,
-                          onTap: () {
-                            _pageController.nextPage(
-                                duration: const Duration(milliseconds: 200),
-                                curve: Curves.easeInOut);
-                          },
-                        ),
+                        _buildEmailPage(),
+                        _buildPasswordPage(),
+                        _buildVerifyEmailPage(),
                       ],
                     ),
-                  )
-                ],
-              ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
+                  child: Row(
+                    children: [
+                      AhlIconButton(
+                        icon: Icons.chevron_left,
+                        fillColor: Colors.white.withOpacity(0.5),
+                        iconColor: AhlColors.darkOrange,
+                        hoverIconColor: Colors.white,
+                        onTap: () {
+                          _pageController.previousPage(
+                              duration: const Duration(milliseconds: 200),
+                              curve: Curves.easeInOut);
+                        },
+                      ),
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: AhlPageIndicator(
+                            currentItem: _currentPage,
+                            itemCount: 3,
+                            activeColor: AhlColors.darkOrange,
+                            inactiveColor:
+                                AhlColors.darkOrange.withOpacity(0.2),
+                          ),
+                        ),
+                      ),
+                      AhlIconButton(
+                        icon: Icons.chevron_right,
+                        fillColor: Colors.white.withOpacity(0.5),
+                        iconColor: AhlColors.darkOrange,
+                        hoverIconColor: Colors.white,
+                        onTap: () {
+                          _pageController.nextPage(
+                              duration: const Duration(milliseconds: 200),
+                              curve: Curves.easeInOut);
+                        },
+                      ),
+                    ],
+                  ),
+                )
+              ],
             ),
           ),
         ),

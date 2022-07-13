@@ -33,12 +33,22 @@ class _AppWidgetState extends ConsumerState<AppWidget> {
         // highlightColor: Colors.transparent,
         textTheme: const TextTheme(
           headline1: TextStyle(
-            fontSize: 24.0,
+            fontSize: 24,
+            fontWeight: FontWeight.w700,
+            color: AhlColors.primary,
+          ),
+          headline2: TextStyle(
+            fontSize: 21,
             fontWeight: FontWeight.w700,
             color: AhlColors.primary,
           ),
           bodyText1: TextStyle(
-            fontSize: 14.0,
+            fontSize: 14,
+            fontWeight: FontWeight.w700,
+            color: AhlColors.primary,
+          ),
+          subtitle1: TextStyle(
+            fontSize: 12,
             fontWeight: FontWeight.w700,
             color: AhlColors.primary,
           ),

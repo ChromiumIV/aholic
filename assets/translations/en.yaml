@@ -4,6 +4,8 @@ title:
   register_email: What's your email?
   register_password: Enter a password
   register_verify_email: Verify your email
+  add_to_timeline: Add to timeline
+  new_event: New event
 message:
   splash: Next-Gen Life Organizer
   register_password: We'll use your password to encrypt your keys. Please keep it safe and secure.
@@ -14,3 +16,22 @@ label:
   create_account: Create Account
   open_mail_app: Open Mail App
   resend_email: Resend Email
+  event: Event
+  reminder: Reminder
+  transaction: Transaction
+  goal: Goal
+  title: Title
+  to_lower: to
+  all_day: All-day
+  add_to: Add to
+  location: Location
+  note: Note
+  from: From
+  to: To
+  sun: S
+  mon: M
+  tue: T
+  wed: W
+  thu: T
+  fri: F
+  sat: S

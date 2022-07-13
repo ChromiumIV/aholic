@@ -61,9 +61,16 @@ class _AhlBottomNavigationBarState extends State<AhlBottomNavigationBar> {
         ),
         Align(
           alignment: Alignment.topCenter,
-          child: Container(
-            transform: Matrix4.translationValues(0, -21, 0),
-            child: const AhlIconButton(icon: Icons.add),
+          child: Stack(
+            children: [
+              Transform.translate(
+                offset: Offset(0, -21),
+                child: AhlIconButton(
+                  icon: Icons.add,
+                  onTap: widget.onFabPressed,
+                ),
+              ),
+            ],
           ),
         )
       ],

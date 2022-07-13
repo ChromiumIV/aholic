@@ -28,6 +28,10 @@ class _$AppRouter extends RootStackRouter {
     MainRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
           routeData: routeData, child: const MainPage());
+    },
+    CreateEventRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: const CreateEventPage());
     }
   };
 
@@ -37,7 +41,8 @@ class _$AppRouter extends RootStackRouter {
             path: '/', redirectTo: '/main', fullMatch: true),
         RouteConfig(SignInRoute.name, path: '/login'),
         RouteConfig(RegisterRoute.name, path: '/register'),
-        RouteConfig(MainRoute.name, path: '/main')
+        RouteConfig(MainRoute.name, path: '/main'),
+        RouteConfig(CreateEventRoute.name, path: '/new-event')
       ];
 }
 
@@ -63,4 +68,12 @@ class MainRoute extends PageRouteInfo<void> {
   const MainRoute() : super(MainRoute.name, path: '/main');
 
   static const String name = 'MainRoute';
+}
+
+/// generated route for
+/// [CreateEventPage]
+class CreateEventRoute extends PageRouteInfo<void> {
+  const CreateEventRoute() : super(CreateEventRoute.name, path: '/new-event');
+
+  static const String name = 'CreateEventRoute';
 }

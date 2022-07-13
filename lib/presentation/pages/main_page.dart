@@ -1,9 +1,13 @@
 import 'package:aholic/presentation/page_fragments/space_page_fragment.dart';
 import 'package:aholic/presentation/page_fragments/timeline_page_fragment.dart';
+import 'package:aholic/presentation/router/app_router.dart';
+import 'package:aholic/providers.dart';
+import 'package:aholic/widgets/ahl_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../widgets/ahl_bottom_navigation_bar.dart';
+import '../bottom_sheets/ahl_create_item_bottom_sheet.dart';
 
 class MainPage extends ConsumerStatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -17,8 +21,7 @@ class _MainPageState extends ConsumerState<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
+    return AhlScaffold(
       body: Column(
         children: [
           Row(
@@ -42,6 +45,23 @@ class _MainPageState extends ConsumerState<MainPage> {
               setState(() {
                 _index = index;
               });
+            },
+            onFabPressed: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (_) => AhlCreateItemBottomSheet(
+                  onItemSelected: (index) {
+                    switch (index) {
+                      case 0:
+                        ref
+                            .read(appRouterProvider)
+                            .push(const CreateEventRoute());
+                    }
+                  },
+                ),
+                backgroundColor: Colors.transparent,
+                isScrollControlled: true,
+              );
             },
           ),
         ],
