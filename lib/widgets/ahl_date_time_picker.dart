@@ -1,8 +1,10 @@
+import 'package:aholic/extension/datetime_extension.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../presentation/bottom_sheets/ahl_bottom_sheet.dart';
 import '../presentation/bottom_sheets/ahl_date_picker_bottom_sheet.dart';
+import '../presentation/bottom_sheets/ahl_time_picker_bottom_sheet.dart';
 import '../theme/ahl_colors.dart';
 import 'ahl_animated_container.dart';
 
@@ -50,7 +52,9 @@ class _AhlDateTimePickerState extends State<AhlDateTimePicker> {
         children: [
           AhlAnimatedContainer(
             decorationBuilder: (isPressed) => BoxDecoration(
-              color: isPressed ? widget.textColor : widget.fillColor,
+              color: isPressed
+                  ? widget.textColor
+                  : widget.fillColor.withOpacity(0.2),
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(8),
                 topRight: Radius.circular(8),
@@ -72,7 +76,15 @@ class _AhlDateTimePickerState extends State<AhlDateTimePicker> {
               showAhlBottomSheet(
                 context: context,
                 bottomSheet: AhlDatePickerBottomSheet(
+                  value: _value,
                   subtitle: widget.bottomSheetSubtitle,
+                  fillColor: widget.fillColor,
+                  textColor: widget.textColor,
+                  onDateSelected: (selectedDate) {
+                    setState(() {
+                      _value = _value.setDate(selectedDate);
+                    });
+                  },
                 ),
               );
             },
@@ -82,7 +94,9 @@ class _AhlDateTimePickerState extends State<AhlDateTimePicker> {
           ),
           AhlAnimatedContainer(
             decorationBuilder: (isPressed) => BoxDecoration(
-              color: isPressed ? widget.textColor : widget.fillColor,
+              color: isPressed
+                  ? widget.textColor
+                  : widget.fillColor.withOpacity(0.2),
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(2),
                 topRight: Radius.circular(2),
@@ -100,6 +114,21 @@ class _AhlDateTimePickerState extends State<AhlDateTimePicker> {
                         isPressed ? widget.hoverTextColor : widget.textColor),
               ),
             ),
+            onTap: () {
+              showAhlBottomSheet(
+                context: context,
+                bottomSheet: AhlTimePickerBottomSheet(
+                  value: _value,
+                  fillColor: widget.fillColor,
+                  textColor: widget.textColor,
+                  onTimeSelected: (selectedTime) {
+                    setState(() {
+                      _value = _value.setTime(selectedTime);
+                    });
+                  },
+                ),
+              );
+            },
           ),
         ],
       ),

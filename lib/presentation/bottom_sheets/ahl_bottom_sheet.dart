@@ -6,5 +6,6 @@ void showAhlBottomSheet(
     context: context,
     builder: (_) => bottomSheet,
     backgroundColor: Colors.transparent,
+    isScrollControlled: true,
   );
 }

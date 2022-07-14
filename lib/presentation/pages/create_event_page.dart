@@ -79,7 +79,7 @@ class CreateEventPage extends ConsumerWidget {
             children: [
               Expanded(
                 child: AhlDateTimePicker(
-                  fillColor: AhlColors.orange.withOpacity(0.2),
+                  fillColor: AhlColors.orange,
                   textColor: AhlColors.darkOrange,
                   bottomSheetSubtitle: 'label.from'.tr(),
                   value: DateTime.now(),
@@ -98,7 +98,7 @@ class CreateEventPage extends ConsumerWidget {
               ),
               Expanded(
                 child: AhlDateTimePicker(
-                  fillColor: AhlColors.orange.withOpacity(0.2),
+                  fillColor: AhlColors.orange,
                   textColor: AhlColors.darkOrange,
                   bottomSheetSubtitle: 'label.to'.tr(),
                   value: DateTime.now(),

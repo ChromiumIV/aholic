@@ -35,3 +35,5 @@ label:
   thu: T
   fri: F
   sat: S
+  am: AM
+  pm: PM

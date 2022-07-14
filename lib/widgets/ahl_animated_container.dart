@@ -9,6 +9,11 @@ class AhlAnimatedContainer extends StatefulWidget {
     this.builder,
     this.decorationBuilder,
     this.onTap,
+    this.padding,
+    this.minWidth = 0,
+    this.maxWidth = double.infinity,
+    this.minHeight = 0,
+    this.maxHeight = double.infinity,
   }) : super(key: key);
 
   final double? width;
@@ -17,6 +22,11 @@ class AhlAnimatedContainer extends StatefulWidget {
   final Widget Function(bool)? builder;
   final BoxDecoration Function(bool)? decorationBuilder;
   final void Function()? onTap;
+  final EdgeInsets? padding;
+  final double minWidth;
+  final double maxWidth;
+  final double minHeight;
+  final double maxHeight;
 
   @override
   State<AhlAnimatedContainer> createState() => _AhlAnimatedContainerState();
@@ -35,10 +45,17 @@ class _AhlAnimatedContainerState extends State<AhlAnimatedContainer> {
       // onTapCancel: () => setState(() => _isPressed = false),
       onTap: widget.onTap,
       child: AnimatedContainer(
+        constraints: BoxConstraints(
+          minWidth: widget.minWidth,
+          maxWidth: widget.maxWidth,
+          minHeight: widget.minHeight,
+          maxHeight: widget.maxHeight,
+        ),
         duration: const Duration(milliseconds: 100),
         width: widget.width,
         height: widget.height,
         alignment: widget.alignment,
+        padding: widget.padding,
         decoration: widget.decorationBuilder != null
             ? widget.decorationBuilder!(_isPressed)
             : null,

@@ -42,6 +42,8 @@ dependencies:
   auto_route: ^4.2.0
   collection: ^1.16.0
   expandable_page_view: ^1.0.17
+  jiffy: ^5.0.0
+  circular_widgets: ^2.1.0
 
 dev_dependencies:
   flutter_test:
