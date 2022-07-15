@@ -14,7 +14,7 @@ class AhlDateTimePicker extends StatefulWidget {
     this.fillColor = AhlColors.primary20,
     this.textColor = AhlColors.primary,
     this.hoverTextColor = Colors.white,
-    this.bottomSheetSubtitle,
+    this.datePickerSubtitle,
     required this.value,
     this.onUpdated,
     this.padding = const EdgeInsets.only(bottom: 12),
@@ -23,7 +23,7 @@ class AhlDateTimePicker extends StatefulWidget {
   final Color fillColor;
   final Color textColor;
   final Color hoverTextColor;
-  final String? bottomSheetSubtitle;
+  final String? datePickerSubtitle;
   final DateTime value;
   final void Function(DateTime dateTime)? onUpdated;
   final EdgeInsets padding;
@@ -38,9 +38,9 @@ class _AhlDateTimePickerState extends State<AhlDateTimePicker> {
   @override
   void initState() {
     super.initState();
-    setState(() {
-      _value = widget.value;
-    });
+    //setState(() {
+    _value = widget.value;
+    //});
   }
 
   @override
@@ -77,7 +77,7 @@ class _AhlDateTimePickerState extends State<AhlDateTimePicker> {
                 context: context,
                 bottomSheet: AhlDatePickerBottomSheet(
                   value: _value,
-                  subtitle: widget.bottomSheetSubtitle,
+                  subtitle: widget.datePickerSubtitle,
                   fillColor: widget.fillColor,
                   textColor: widget.textColor,
                   onDateSelected: (selectedDate) {

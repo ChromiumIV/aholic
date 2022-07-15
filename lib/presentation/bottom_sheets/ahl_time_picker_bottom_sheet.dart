@@ -39,10 +39,10 @@ class _AhlTimePickerBottomSheetState extends State<AhlTimePickerBottomSheet> {
   void initState() {
     super.initState();
     if (widget.value != null) {
-      setState(() {
-        _value = widget.value!;
-        _timePeriod = widget.value!.hour < 12 ? TimePeriod.am : TimePeriod.pm;
-      });
+      //setState(() {
+      _value = widget.value!;
+      _timePeriod = widget.value!.hour < 12 ? TimePeriod.am : TimePeriod.pm;
+      //});
     }
   }
 

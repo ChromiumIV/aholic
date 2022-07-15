@@ -16,6 +16,9 @@ class AhlTextField extends StatefulWidget {
     this.selectAllOnFocus = true,
     this.value,
     this.padding = const EdgeInsets.only(bottom: 12),
+    this.keyboardType,
+    this.minLines,
+    this.maxLines,
   }) : super(key: key);
 
   final bool autofocus;
@@ -29,6 +32,9 @@ class AhlTextField extends StatefulWidget {
   final bool selectAllOnFocus;
   final String? value;
   final EdgeInsets padding;
+  final TextInputType? keyboardType;
+  final int? minLines;
+  final int? maxLines;
 
   @override
   State<AhlTextField> createState() => _AhlTextFieldState();
@@ -85,6 +91,9 @@ class _AhlTextFieldState extends State<AhlTextField> {
               child: TextField(
                 autofocus: widget.autofocus,
                 controller: _controller,
+                keyboardType: widget.keyboardType,
+                maxLines: widget.maxLines,
+                minLines: widget.minLines,
                 cursorColor: widget.textColor,
                 style: Theme.of(context)
                     .textTheme

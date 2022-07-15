@@ -42,10 +42,10 @@ class _AhlDatePickerBottomSheetState extends State<AhlDatePickerBottomSheet> {
   void initState() {
     super.initState();
     if (widget.value != null) {
-      setState(() {
+      //setState(() {
         _selectedDate = widget.value!;
         _visibleDate = DateTime(_selectedDate.year, _selectedDate.month, 1);
-      });
+      //});
       final now = DateTime.now();
       final x = Jiffy([_selectedDate.year, _selectedDate.month, 1])
           .diff(Jiffy([now.year, now.month, 1]), Units.MONTH)
