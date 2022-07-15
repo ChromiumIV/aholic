@@ -7,6 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../theme/ahl_colors.dart';
 import '../../widgets/ahl_checkbox.dart';
+import '../../widgets/ahl_color_picker.dart';
 import '../../widgets/ahl_combo_box.dart';
 import '../../widgets/ahl_date_time_picker.dart';
 import '../../widgets/ahl_scaffold.dart';
@@ -21,6 +22,7 @@ class CreateEventPage extends ConsumerStatefulWidget {
 
 class _CreateEventPageState extends ConsumerState<CreateEventPage> {
   bool _isAllDay = false;
+  Color _color = AhlColors.orange;
 
   @override
   Widget build(BuildContext context) {
@@ -199,6 +201,16 @@ class _CreateEventPageState extends ConsumerState<CreateEventPage> {
                   minLines: 3,
                   maxLines: 6,
                 ),
+                Row(
+                  children: [
+                    AhlColorPicker(
+                      value: _color,
+                      onSelected: (selectedColor) => setState(() {
+                        _color = selectedColor;
+                      }),
+                    ),
+                  ],
+                )
               ],
             ),
           ),

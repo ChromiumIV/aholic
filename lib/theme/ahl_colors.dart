@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class AhlColors {
@@ -35,4 +37,30 @@ class AhlColors {
   static const Color darkMint = Color(0xFF1D623D);
   static const Color darkGreen = Color(0xFF396218);
   static const Color darkLime = Color(0xFF565B1A);
+
+  static Color toDark(Color normalColor) => normalColor == yellow
+      ? darkYellow
+      : normalColor == orange
+          ? darkOrange
+          : normalColor == red
+              ? darkRed
+              : normalColor == pink
+                  ? darkPink
+                  : normalColor == violet
+                      ? darkViolet
+                      : normalColor == purple
+                          ? darkPurple
+                          : normalColor == blue
+                              ? darkBlue
+                              : normalColor == azure
+                                  ? darkAzure
+                                  : normalColor == cyan
+                                      ? darkCyan
+                                      : normalColor == mint
+                                          ? darkMint
+                                          : normalColor == green
+                                              ? darkGreen
+                                              : normalColor == lime
+                                                  ? darkLime
+                                                  : primary;
 }

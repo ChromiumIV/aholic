@@ -43,8 +43,8 @@ class _AhlDatePickerBottomSheetState extends State<AhlDatePickerBottomSheet> {
     super.initState();
     if (widget.value != null) {
       //setState(() {
-        _selectedDate = widget.value!;
-        _visibleDate = DateTime(_selectedDate.year, _selectedDate.month, 1);
+      _selectedDate = widget.value!;
+      _visibleDate = DateTime(_selectedDate.year, _selectedDate.month, 1);
       //});
       final now = DateTime.now();
       final x = Jiffy([_selectedDate.year, _selectedDate.month, 1])
@@ -60,8 +60,9 @@ class _AhlDatePickerBottomSheetState extends State<AhlDatePickerBottomSheet> {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(topRight: Radius.circular(24))),
+        color: Colors.white,
+        borderRadius: BorderRadius.only(topRight: Radius.circular(24)),
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
