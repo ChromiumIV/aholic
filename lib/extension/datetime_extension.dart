@@ -37,4 +37,12 @@ extension DateTimeExtension on DateTime {
     return DateTime(year, month, day, time.hour, time.minute, time.second,
         time.millisecond, time.microsecond);
   }
+
+  DateTime getDateEnd() {
+    return DateTime(year, month, day);
+  }
+
+  DateTime getDateStart() {
+    return DateTime(year, month, day, 23, 59, 59, 999, 999);
+  }
 }

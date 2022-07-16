@@ -22,14 +22,13 @@ class _MainPageState extends ConsumerState<MainPage> {
   @override
   Widget build(BuildContext context) {
     return AhlScaffold(
-      body: Column(
-        children: [
-          Row(
-            children: [],
-          ),
-          Expanded(
-            child: Container(
-              color: Colors.yellow,
+      body: SafeArea(
+        child: Column(
+          children: [
+            Row(
+              children: [],
+            ),
+            Expanded(
               child: IndexedStack(
                 index: _index,
                 children: const [
@@ -38,36 +37,36 @@ class _MainPageState extends ConsumerState<MainPage> {
                 ],
               ),
             ),
-          ),
-          AhlBottomNavigationBar(
-            icons: const [
-              Icons.view_agenda,
-              Icons.space_dashboard,
-            ],
-            onTabSelected: (index) {
-              setState(() {
-                _index = index;
-              });
-            },
-            onFabPressed: () {
-              showModalBottomSheet(
-                context: context,
-                builder: (_) => AhlCreateItemBottomSheet(
-                  onItemSelected: (index) {
-                    switch (index) {
-                      case 0:
-                        ref
-                            .read(appRouterProvider)
-                            .push(const CreateEventRoute());
-                    }
-                  },
-                ),
-                backgroundColor: Colors.transparent,
-                isScrollControlled: true,
-              );
-            },
-          ),
-        ],
+            AhlBottomNavigationBar(
+              icons: const [
+                Icons.view_agenda,
+                Icons.space_dashboard,
+              ],
+              onTabSelected: (index) {
+                setState(() {
+                  _index = index;
+                });
+              },
+              onFabPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (_) => AhlCreateItemBottomSheet(
+                    onItemSelected: (index) {
+                      switch (index) {
+                        case 0:
+                          ref
+                              .read(appRouterProvider)
+                              .push(const CreateEventRoute());
+                      }
+                    },
+                  ),
+                  backgroundColor: Colors.transparent,
+                  isScrollControlled: true,
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

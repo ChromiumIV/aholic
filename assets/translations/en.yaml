@@ -7,6 +7,8 @@ title:
   add_to_timeline: Add to timeline
   new_event: New event
   select_timeline: Select timeline
+  timeline: Timeline
+  space: Space
 message:
   splash: Next-Gen Life Organizer
   register_password: We'll use your password to encrypt your keys. Please keep it safe and secure.
