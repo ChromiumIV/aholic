@@ -28,12 +28,15 @@ class _MainPageState extends ConsumerState<MainPage> {
             children: [],
           ),
           Expanded(
-            child: IndexedStack(
-              index: _index,
-              children: const [
-                TimelinePageFragment(),
-                SpacePageFragment(),
-              ],
+            child: Container(
+              color: Colors.yellow,
+              child: IndexedStack(
+                index: _index,
+                children: const [
+                  TimelinePageFragment(),
+                  SpacePageFragment(),
+                ],
+              ),
             ),
           ),
           AhlBottomNavigationBar(

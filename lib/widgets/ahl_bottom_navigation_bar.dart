@@ -46,34 +46,24 @@ class _AhlBottomNavigationBarState extends State<AhlBottomNavigationBar> {
       );
     });
 
-    return Stack(
-      children: [
-        Container(
-          color: Colors.white,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: iconButtons,
-            ),
-          ),
+    iconButtons.insert(
+      (iconButtons.length - 1 / 2).floor(),
+      AhlIconButton(
+        icon: Icons.add,
+        onTap: widget.onFabPressed,
+      ),
+    );
+
+    return Container(
+      color: Colors.white,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: iconButtons,
         ),
-        Align(
-          alignment: Alignment.topCenter,
-          child: Stack(
-            children: [
-              Transform.translate(
-                offset: Offset(0, -21),
-                child: AhlIconButton(
-                  icon: Icons.add,
-                  onTap: widget.onFabPressed,
-                ),
-              ),
-            ],
-          ),
-        )
-      ],
+      ),
     );
   }
 }
