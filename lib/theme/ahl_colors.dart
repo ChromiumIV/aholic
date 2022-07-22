@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 class AhlColors {
@@ -11,6 +9,8 @@ class AhlColors {
   static const Color primary10 = Color(0xFFF6F9FD);
 
   static const Color primaryA20 = Color(0x330E2241);
+
+  static const Color accent = Color(0xFFFB1F56);
 
   static const Color yellow = Color(0xFFFDD548);
   static const Color orange = Color(0xFFFFAC7D);

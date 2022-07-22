@@ -72,263 +72,258 @@ class _AhlTimePickerBottomSheetState extends State<AhlTimePickerBottomSheet> {
             padding: const EdgeInsets.only(bottom: 24),
             child: AspectRatio(
               aspectRatio: 1,
-              child: Expanded(
-                child: LayoutBuilder(
-                  builder: (context, constraints) {
-                    var smallestBoundary =
-                        min(constraints.maxHeight, constraints.maxWidth);
-                    return CircularWidgets(
-                      itemBuilder: (_, index) {
-                        if (_mode == TimePickerMode.hour) {
-                          if (_value.hour % 12 == index) {
-                            return _buildSelectedDayButton(
-                                (index == 0 ? 12 : index).toString(), 72, () {
-                              setState(() {
-                                _value = _value.setHour(
-                                    _timePeriod == TimePeriod.am
-                                        ? index
-                                        : index + 12);
-                                _mode = TimePickerMode.minute;
-                              });
-                              _notifyTimeSelected();
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  var smallestBoundary =
+                      min(constraints.maxHeight, constraints.maxWidth);
+                  return CircularWidgets(
+                    itemBuilder: (_, index) {
+                      if (_mode == TimePickerMode.hour) {
+                        if (_value.hour % 12 == index) {
+                          return _buildSelectedDayButton(
+                              (index == 0 ? 12 : index).toString(), 72, () {
+                            setState(() {
+                              _value = _value.setHour(
+                                  _timePeriod == TimePeriod.am
+                                      ? index
+                                      : index + 12);
+                              _mode = TimePickerMode.minute;
                             });
-                          } else {
-                            return _buildUnselectedDayButton(
-                                (index == 0 ? 12 : index).toString(), 72, () {
-                              setState(() {
-                                _value = _value.setHour(
-                                    _timePeriod == TimePeriod.am
-                                        ? index
-                                        : index + 12);
-                                _mode = TimePickerMode.minute;
-                              });
-                              _notifyTimeSelected();
-                            });
-                          }
+                            _notifyTimeSelected();
+                          });
                         } else {
-                          if (_value.minute == (index * 5)) {
-                            return _buildSelectedDayButton(
-                                (index * 5).toString().padLeft(2, '0'), 72, () {
-                              setState(() {
-                                _value = _value.setMinute(index * 5);
-                              });
-                              _notifyTimeSelected();
-                              Navigator.of(context).pop();
+                          return _buildUnselectedDayButton(
+                              (index == 0 ? 12 : index).toString(), 72, () {
+                            setState(() {
+                              _value = _value.setHour(
+                                  _timePeriod == TimePeriod.am
+                                      ? index
+                                      : index + 12);
+                              _mode = TimePickerMode.minute;
                             });
-                          } else {
-                            return _buildUnselectedDayButton(
-                                (index * 5).toString().padLeft(2, '0'), 72, () {
-                              setState(() {
-                                _value = _value.setMinute(index * 5);
-                              });
-                              _notifyTimeSelected();
-                              Navigator.of(context).pop();
-                            });
-                          }
+                            _notifyTimeSelected();
+                          });
                         }
-                      },
-                      itemsLength: 12,
-                      innerSpacing: smallestBoundary / 12,
-                      centerWidgetRadius: smallestBoundary / 1.8,
-                      radiusOfItem: smallestBoundary / 8,
-                      centerWidgetBuilder: (_) => Stack(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                                color: widget.fillColor.withOpacity(0.2),
-                                borderRadius: BorderRadius.circular(999)),
-                            alignment: Alignment.center,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Row(
+                      } else {
+                        if (_value.minute == (index * 5)) {
+                          return _buildSelectedDayButton(
+                              (index * 5).toString().padLeft(2, '0'), 72, () {
+                            setState(() {
+                              _value = _value.setMinute(index * 5);
+                            });
+                            _notifyTimeSelected();
+                            Navigator.of(context).pop();
+                          });
+                        } else {
+                          return _buildUnselectedDayButton(
+                              (index * 5).toString().padLeft(2, '0'), 72, () {
+                            setState(() {
+                              _value = _value.setMinute(index * 5);
+                            });
+                            _notifyTimeSelected();
+                            Navigator.of(context).pop();
+                          });
+                        }
+                      }
+                    },
+                    itemsLength: 12,
+                    innerSpacing: smallestBoundary / 12,
+                    centerWidgetRadius: smallestBoundary / 1.8,
+                    radiusOfItem: smallestBoundary / 8,
+                    centerWidgetBuilder: (_) => Stack(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                              color: widget.fillColor.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(999)),
+                          alignment: Alignment.center,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        _mode = TimePickerMode.hour;
+                                      });
+                                    },
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          DateFormat('hh').format(_value),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline1
+                                              ?.copyWith(
+                                                fontSize: 48,
+                                                color:
+                                                    _mode == TimePickerMode.hour
+                                                        ? widget.textColor
+                                                        : widget.textColor
+                                                            .withOpacity(0.5),
+                                              ),
+                                        ),
+                                        Container(
+                                          height: 4,
+                                          width: 32,
+                                          color: _mode == TimePickerMode.hour
+                                              ? widget.textColor
+                                              : Colors.transparent,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 8,
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        _mode = TimePickerMode.minute;
+                                      });
+                                    },
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          DateFormat('mm').format(_value),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline1
+                                              ?.copyWith(
+                                                fontSize: 48,
+                                                color: _mode ==
+                                                        TimePickerMode.minute
+                                                    ? widget.textColor
+                                                    : widget.textColor
+                                                        .withOpacity(0.5),
+                                              ),
+                                        ),
+                                        Container(
+                                          height: 4,
+                                          width: 32,
+                                          color: _mode == TimePickerMode.minute
+                                              ? widget.textColor
+                                              : Colors.transparent,
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 12),
+                                child: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          _mode = TimePickerMode.hour;
-                                        });
-                                      },
-                                      child: Column(
-                                        children: [
-                                          Text(
-                                            DateFormat('hh').format(_value),
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline1
-                                                ?.copyWith(
-                                                  fontSize: 48,
-                                                  color: _mode ==
-                                                          TimePickerMode.hour
-                                                      ? widget.textColor
-                                                      : widget.textColor
-                                                          .withOpacity(0.5),
-                                                ),
-                                          ),
-                                          Container(
-                                            height: 4,
-                                            width: 32,
-                                            color: _mode == TimePickerMode.hour
+                                    AhlAnimatedContainer(
+                                      minWidth: 64,
+                                      alignment: Alignment.center,
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 4),
+                                      builder: (isPressed) => Text(
+                                        'label.am'.tr(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1
+                                            ?.copyWith(
+                                                color: _timePeriod ==
+                                                        TimePeriod.am
+                                                    ? (isPressed
+                                                        ? Colors.white
+                                                        : widget.textColor)
+                                                    : (isPressed
+                                                        ? Colors.white
+                                                        : widget.textColor
+                                                            .withOpacity(0.5))),
+                                      ),
+                                      decorationBuilder: (isPressed) =>
+                                          BoxDecoration(
+                                        color: _timePeriod == TimePeriod.am
+                                            ? (isPressed
                                                 ? widget.textColor
-                                                : Colors.transparent,
-                                          ),
-                                        ],
+                                                : widget.fillColor)
+                                            : (isPressed
+                                                ? widget.textColor
+                                                : Colors.white),
+                                        borderRadius: const BorderRadius.only(
+                                          topLeft: Radius.circular(2),
+                                          topRight: Radius.circular(2),
+                                          bottomLeft: Radius.circular(12),
+                                          bottomRight: Radius.circular(4),
+                                        ),
                                       ),
-                                    ),
-                                    const SizedBox(
-                                      width: 8,
-                                    ),
-                                    GestureDetector(
                                       onTap: () {
                                         setState(() {
-                                          _mode = TimePickerMode.minute;
+                                          _timePeriod = TimePeriod.am;
+                                          if (_value.hour >= 12) {
+                                            _value = _value
+                                                .setHour(_value.hour - 12);
+                                          }
                                         });
+                                        _notifyTimeSelected();
                                       },
-                                      child: Column(
-                                        children: [
-                                          Text(
-                                            DateFormat('mm').format(_value),
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline1
-                                                ?.copyWith(
-                                                  fontSize: 48,
-                                                  color: _mode ==
-                                                          TimePickerMode.minute
-                                                      ? widget.textColor
-                                                      : widget.textColor
-                                                          .withOpacity(0.5),
-                                                ),
-                                          ),
-                                          Container(
-                                            height: 4,
-                                            width: 32,
-                                            color:
-                                                _mode == TimePickerMode.minute
-                                                    ? widget.textColor
-                                                    : Colors.transparent,
-                                          ),
-                                        ],
+                                    ),
+                                    const SizedBox(width: 2),
+                                    AhlAnimatedContainer(
+                                      minWidth: 64,
+                                      alignment: Alignment.center,
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 4),
+                                      builder: (isPressed) => Text(
+                                        'label.pm'.tr(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1
+                                            ?.copyWith(
+                                                color: _timePeriod ==
+                                                        TimePeriod.pm
+                                                    ? (isPressed
+                                                        ? Colors.white
+                                                        : widget.textColor)
+                                                    : (isPressed
+                                                        ? Colors.white
+                                                        : widget.textColor
+                                                            .withOpacity(0.5))),
                                       ),
+                                      decorationBuilder: (isPressed) =>
+                                          BoxDecoration(
+                                        color: _timePeriod == TimePeriod.pm
+                                            ? (isPressed
+                                                ? widget.textColor
+                                                : widget.fillColor)
+                                            : (isPressed
+                                                ? widget.textColor
+                                                : Colors.white),
+                                        borderRadius: const BorderRadius.only(
+                                          topLeft: Radius.circular(2),
+                                          topRight: Radius.circular(2),
+                                          bottomLeft: Radius.circular(2),
+                                          bottomRight: Radius.circular(12),
+                                        ),
+                                      ),
+                                      onTap: () {
+                                        setState(() {
+                                          _timePeriod = TimePeriod.pm;
+                                          if (_value.hour < 12) {
+                                            _value = _value
+                                                .setHour(_value.hour + 12);
+                                          }
+                                        });
+                                        _notifyTimeSelected();
+                                      },
                                     )
                                   ],
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 12),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      AhlAnimatedContainer(
-                                        minWidth: 64,
-                                        alignment: Alignment.center,
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 4),
-                                        builder: (isPressed) => Text(
-                                          'label.am'.tr(),
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyText1
-                                              ?.copyWith(
-                                                  color: _timePeriod ==
-                                                          TimePeriod.am
-                                                      ? (isPressed
-                                                          ? Colors.white
-                                                          : widget.textColor)
-                                                      : (isPressed
-                                                          ? Colors.white
-                                                          : widget.textColor
-                                                              .withOpacity(
-                                                                  0.5))),
-                                        ),
-                                        decorationBuilder: (isPressed) =>
-                                            BoxDecoration(
-                                          color: _timePeriod == TimePeriod.am
-                                              ? (isPressed
-                                                  ? widget.textColor
-                                                  : widget.fillColor)
-                                              : (isPressed
-                                                  ? widget.textColor
-                                                  : Colors.white),
-                                          borderRadius: const BorderRadius.only(
-                                            topLeft: Radius.circular(2),
-                                            topRight: Radius.circular(2),
-                                            bottomLeft: Radius.circular(12),
-                                            bottomRight: Radius.circular(4),
-                                          ),
-                                        ),
-                                        onTap: () {
-                                          setState(() {
-                                            _timePeriod = TimePeriod.am;
-                                            if (_value.hour >= 12) {
-                                              _value = _value
-                                                  .setHour(_value.hour - 12);
-                                            }
-                                          });
-                                          _notifyTimeSelected();
-                                        },
-                                      ),
-                                      const SizedBox(width: 2),
-                                      AhlAnimatedContainer(
-                                        minWidth: 64,
-                                        alignment: Alignment.center,
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 4),
-                                        builder: (isPressed) => Text(
-                                          'label.pm'.tr(),
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyText1
-                                              ?.copyWith(
-                                                  color: _timePeriod ==
-                                                          TimePeriod.pm
-                                                      ? (isPressed
-                                                          ? Colors.white
-                                                          : widget.textColor)
-                                                      : (isPressed
-                                                          ? Colors.white
-                                                          : widget.textColor
-                                                              .withOpacity(
-                                                                  0.5))),
-                                        ),
-                                        decorationBuilder: (isPressed) =>
-                                            BoxDecoration(
-                                          color: _timePeriod == TimePeriod.pm
-                                              ? (isPressed
-                                                  ? widget.textColor
-                                                  : widget.fillColor)
-                                              : (isPressed
-                                                  ? widget.textColor
-                                                  : Colors.white),
-                                          borderRadius: const BorderRadius.only(
-                                            topLeft: Radius.circular(2),
-                                            topRight: Radius.circular(2),
-                                            bottomLeft: Radius.circular(2),
-                                            bottomRight: Radius.circular(12),
-                                          ),
-                                        ),
-                                        onTap: () {
-                                          setState(() {
-                                            _timePeriod = TimePeriod.pm;
-                                            if (_value.hour < 12) {
-                                              _value = _value
-                                                  .setHour(_value.hour + 12);
-                                            }
-                                          });
-                                          _notifyTimeSelected();
-                                        },
-                                      )
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
+                              )
+                            ],
                           ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
               ),
             ),
           )

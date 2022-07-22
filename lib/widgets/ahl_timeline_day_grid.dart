@@ -48,10 +48,11 @@ class _AhlTimelineDayGridState extends State<AhlTimelineDayGrid> {
     for (final item in items) {
       _addVisibleHours(item.displayedStartedAt, item.displayedEndedAt);
 
-      if (lastItemEnding != null &&
+      if (lastItemEnding == null ||
           (item.displayedStartedAt.isAtSameMomentAs(lastItemEnding) ||
               item.displayedStartedAt.isAfter(lastItemEnding))) {
         _packItems(itemGroups);
+        // itemGroups.clear();
         lastItemEnding = null;
       }
 
@@ -65,9 +66,7 @@ class _AhlTimelineDayGridState extends State<AhlTimelineDayGrid> {
       }
 
       if (!isPlaced) {
-        final newGroup = ItemGroup(items: []);
-        newGroup.items.add(item);
-        itemGroups.add(newGroup);
+        itemGroups.add(ItemGroup(items: [item]));
       }
 
       if (lastItemEnding == null ||
@@ -85,6 +84,19 @@ class _AhlTimelineDayGridState extends State<AhlTimelineDayGrid> {
 
   void _packItems(List<ItemGroup> groups) {
     final n = groups.length;
+
+    // var colIndex = 0;
+
+    // for (final group in groups) {
+    //   for (final item in group.items) {
+    //     final colSpan = _expandItem(item, colIndex, groups);
+    //     item.leftPaddingRatio = colIndex / n;
+    //     item.widthRatio = (colIndex + colSpan) / n;
+    //   }
+
+    //   colIndex++;
+    // }
+
     for (var i = 0; i < n; i++) {
       final col = groups[i];
 
@@ -98,7 +110,7 @@ class _AhlTimelineDayGridState extends State<AhlTimelineDayGrid> {
   }
 
   int _expandItem(PositionedItem item, int colIndex, List<ItemGroup> groups) {
-    int colSpan = 1;
+    var colSpan = 1;
     for (final group in groups.skip(colIndex + 1)) {
       for (final ev in group.items) {
         if (_areOverlapping(ev, item)) {
@@ -149,11 +161,14 @@ class _AhlTimelineDayGridState extends State<AhlTimelineDayGrid> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        _buildHourLabels(_visibleHours),
-        _buildItems(_itemGroups),
-      ],
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 36),
+      child: Row(
+        children: [
+          _buildHourLabels(_visibleHours),
+          _buildItems(_itemGroups),
+        ],
+      ),
     );
   }
 
@@ -164,7 +179,7 @@ class _AhlTimelineDayGridState extends State<AhlTimelineDayGrid> {
       final hour = visibleHours[i];
       hourWidgets.add(
         SizedBox(
-          width: 72,
+          width: 64,
           height: widget.heightPerHour,
           child: Padding(
             padding: const EdgeInsets.only(right: 8),
@@ -183,20 +198,27 @@ class _AhlTimelineDayGridState extends State<AhlTimelineDayGrid> {
                     ),
                   ),
                 ),
+                // Align(
+                //     alignment: Alignment.topRight,
+                //     child: Container(
+                //         height: 1, width: 8, color: AhlColors.primary40)),
                 Align(
                   alignment: Alignment.centerRight,
                   child: (i < (visibleHours.length - 1) &&
                           visibleHours[i + 1] - hour > 1)
                       ? const Padding(
-                          padding: EdgeInsets.only(right: 2),
+                          padding: EdgeInsets.only(right: 6),
                           child: DottedLine(
                               direction: Axis.vertical,
                               lineLength: 24,
                               dashColor: AhlColors.primary40),
                         )
-                      : Container(
-                          height: 1, width: 6, color: AhlColors.primary40),
-                )
+                      : Padding(
+                          padding: const EdgeInsets.only(right: 4),
+                          child: Container(
+                              height: 1, width: 6, color: AhlColors.primary40),
+                        ),
+                ),
               ],
             ),
           ),
@@ -216,9 +238,16 @@ class _AhlTimelineDayGridState extends State<AhlTimelineDayGrid> {
         child: Stack(
           children: [
             for (var i = 0; i < _visibleHours.length; i++) _buildGuideline(i),
-            for (final itemGroup in itemGroups)
-              for (final item in itemGroup.items)
-                _buildPositionedItem(item, itemGroups.last == itemGroup),
+            Padding(
+              padding: const EdgeInsets.only(left: 8),
+              child: Stack(
+                children: [
+                  for (final itemGroup in itemGroups)
+                    for (final item in itemGroup.items)
+                      _buildPositionedItem(item, itemGroups.last == itemGroup),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -230,14 +259,14 @@ class _AhlTimelineDayGridState extends State<AhlTimelineDayGrid> {
       padding: EdgeInsets.only(
         top: numOfPrecedingHours * widget.heightPerHour,
       ),
-      // child: Container(
-      //   width: double.infinity,
-      //   height: 1,
-      //   color: AhlColors.primary40,
-      // ),
-      child: DottedLine(
-        dashColor: AhlColors.primary40,
+      child: Container(
+        width: double.infinity,
+        height: 1,
+        color: AhlColors.primary20,
       ),
+      // child: DottedLine(
+      //   dashColor: AhlColors.primary40,
+      // ),
     );
   }
 
@@ -250,9 +279,11 @@ class _AhlTimelineDayGridState extends State<AhlTimelineDayGrid> {
             padding: EdgeInsets.only(
               top: _getItemTopPadding(positionedItem.displayedStartedAt),
               left: positionedItem.leftPaddingRatio * constraints.maxWidth,
+              // right: positionedItem.widthRatio * constraints.maxWidth,
             ),
             child: SizedBox(
               width: positionedItem.widthRatio * constraints.maxWidth,
+              // width: double.infinity,
               height: positionedItem.displayedEndedAt
                           .difference(positionedItem.displayedStartedAt)
                           .inMinutes /
@@ -260,7 +291,7 @@ class _AhlTimelineDayGridState extends State<AhlTimelineDayGrid> {
                       widget.heightPerHour +
                   1,
               child: Padding(
-                padding: EdgeInsets.only(left: 8, right: isLastColumn ? 16 : 0),
+                padding: EdgeInsets.only(right: 8),
                 child: _buildItem(positionedItem.item),
               ),
             ),

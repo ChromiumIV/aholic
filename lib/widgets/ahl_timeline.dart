@@ -200,12 +200,11 @@ class _AhlTimelineState extends State<AhlTimeline> {
         return InfiniteListItem(
           headerBuilder: (_) {
             return Padding(
-              padding: EdgeInsets.only(
-                  top: 12, bottom: nonAllDayItems.isEmpty ? 0 : 24),
+              padding: EdgeInsets.only(bottom: nonAllDayItems.isEmpty ? 8 : 36),
               child: Row(
                 children: [
                   Container(
-                    width: 72,
+                    width: 64,
                     alignment: Alignment.centerRight,
                     decoration: BoxDecoration(
                       color: items.isEmpty
@@ -229,7 +228,7 @@ class _AhlTimelineState extends State<AhlTimeline> {
                   ),
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 7, right: 15),
+                      padding: const EdgeInsets.only(left: 7, right: 7),
                       child: items.isEmpty
                           ? Container(
                               decoration: BoxDecoration(
@@ -261,7 +260,9 @@ class _AhlTimelineState extends State<AhlTimeline> {
             );
           },
           contentBuilder: (_) {
-            return AhlTimelineDayGrid(items: nonAllDayItems);
+            return (nonAllDayItems.isEmpty)
+                ? const SizedBox()
+                : AhlTimelineDayGrid(items: nonAllDayItems);
           },
         );
       },

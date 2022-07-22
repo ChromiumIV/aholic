@@ -9,7 +9,8 @@ class AhlButton extends StatefulWidget {
     this.onTap,
     this.fillColor = AhlColors.primary,
     this.textColor = Colors.white,
-    this.hoverColor,
+    this.hoverFillColor,
+    this.hoverBorderColor,
     this.isEnabled = true,
     this.padding = const EdgeInsets.only(bottom: 12),
   }) : super(key: key);
@@ -18,7 +19,8 @@ class AhlButton extends StatefulWidget {
   final Function()? onTap;
   final Color fillColor;
   final Color textColor;
-  final Color? hoverColor;
+  final Color? hoverFillColor;
+  final Color? hoverBorderColor;
   final bool isEnabled;
   final EdgeInsets padding;
 
@@ -41,6 +43,7 @@ class _AhlButtonState extends State<AhlButton> {
         onLongPressCancel: () =>
             widget.isEnabled ? setState(() => _isPressed = false) : null,
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(
               child: Opacity(
@@ -50,11 +53,13 @@ class _AhlButtonState extends State<AhlButton> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
-                      color: _isPressed ? widget.fillColor : Colors.transparent,
+                      color: _isPressed
+                          ? (widget.hoverBorderColor ?? widget.fillColor)
+                          : Colors.transparent,
                       width: 2,
                     ),
                     color: _isPressed
-                        ? (widget.hoverColor ?? widget.textColor)
+                        ? (widget.hoverFillColor ?? widget.textColor)
                         : widget.fillColor,
                   ),
                   padding:

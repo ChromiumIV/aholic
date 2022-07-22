@@ -40,3 +40,6 @@ label:
   sat: S
   am: AM
   pm: PM
+  all_upper: ALL
+  timeline_upper: TIMELINE
+  manage: Manage
