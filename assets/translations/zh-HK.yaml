@@ -1,9 +1,47 @@
 app_name: Aholic
 title:
   sign_in: Sign in to Aholic
+  register_email: What's your email?
+  register_password: Enter a password
+  register_verify_email: Verify your email
+  add_to_timeline: Add to timeline
+  new_event: New event
+  select_timeline: Select timeline
+  timeline: Timeline
+  space: Space
+  manage_timelines: Manage timelines
+  settings: Settings
 message:
   splash: Next-Gen Life Organizer
+  register_password: We'll use your password to encrypt your keys. Please keep it safe and secure.
+  register_verify_email: We've sent a verification email to {email}
 label:
   email: Email
   password: Password
   create_account: Create Account
+  open_mail_app: Open Mail App
+  resend_email: Resend Email
+  event: Event
+  reminder: Reminder
+  transaction: Transaction
+  goal: Goal
+  title: Title
+  to_lower: to
+  all_day: All-day
+  add_to: Add to
+  location: Location
+  note: Note
+  from: From
+  to: To
+  sun: S
+  mon: M
+  tue: T
+  wed: W
+  thu: T
+  fri: F
+  sat: S
+  am: AM
+  pm: PM
+  all_upper: ALL
+  timeline_upper: TIMELINE
+  manage: Manage

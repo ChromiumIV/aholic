@@ -42,6 +42,11 @@ class _AppWidgetState extends ConsumerState<AppWidget> {
             fontWeight: FontWeight.w700,
             color: AhlColors.primary,
           ),
+          headline3: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w700,
+            color: AhlColors.primary,
+          ),
           bodyText1: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w700,

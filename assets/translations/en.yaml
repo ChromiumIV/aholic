@@ -9,10 +9,16 @@ title:
   select_timeline: Select timeline
   timeline: Timeline
   space: Space
+  manage_timelines: Manage timelines
+  settings: Settings
+  edit_timeline: Edit timeline
+  delete_timeline: Delete timeline
+  create_timeline: Create timeline
 message:
   splash: Next-Gen Life Organizer
   register_password: We'll use your password to encrypt your keys. Please keep it safe and secure.
   register_verify_email: We've sent a verification email to {email}
+  delete_timeline: Delete timeline '{timelineName}' and all its items?
 label:
   email: Email
   password: Password
@@ -43,3 +49,6 @@ label:
   all_upper: ALL
   timeline_upper: TIMELINE
   manage: Manage
+  edit: Edit
+  delete: Delete
+  create: Create

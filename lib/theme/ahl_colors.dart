@@ -11,6 +11,7 @@ class AhlColors {
   static const Color primaryA20 = Color(0x330E2241);
 
   static const Color accent = Color(0xFFFB1F56);
+  static const Color accent20 = Color(0xFFFFE9EF);
 
   static const Color yellow = Color(0xFFFDD548);
   static const Color orange = Color(0xFFFFAC7D);

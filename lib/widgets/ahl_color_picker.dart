@@ -76,13 +76,14 @@ class _AhlColorPickerState extends State<AhlColorPicker> {
       ),
       onTap: () {
         showAhlBottomSheet(
-            context: context,
-            bottomSheet: AhlColorPickerBottomSheet(
-              value: _value,
-              onSelected: (selectedColor) => setState(() {
-                _value = selectedColor;
-              }),
-            ));
+          context: context,
+          bottomSheet: AhlColorPickerBottomSheet(
+            value: _value,
+            onSelected: (selectedColor) => setState(() {
+              _value = selectedColor;
+            }),
+          ),
+        );
       },
     );
   }

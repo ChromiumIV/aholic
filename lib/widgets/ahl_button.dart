@@ -42,6 +42,7 @@ class _AhlButtonState extends State<AhlButton> {
             widget.isEnabled ? setState(() => _isPressed = false) : null,
         onLongPressCancel: () =>
             widget.isEnabled ? setState(() => _isPressed = false) : null,
+        onTap: widget.onTap,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

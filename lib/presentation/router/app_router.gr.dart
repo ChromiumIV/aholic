@@ -32,6 +32,14 @@ class _$AppRouter extends RootStackRouter {
     CreateEventRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
           routeData: routeData, child: const CreateEventPage());
+    },
+    ManageTimelinesRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: const ManageTimelinesPage());
+    },
+    SettingsRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: const SettingsPage());
     }
   };
 
@@ -42,7 +50,9 @@ class _$AppRouter extends RootStackRouter {
         RouteConfig(SignInRoute.name, path: '/login'),
         RouteConfig(RegisterRoute.name, path: '/register'),
         RouteConfig(MainRoute.name, path: '/main'),
-        RouteConfig(CreateEventRoute.name, path: '/new-event')
+        RouteConfig(CreateEventRoute.name, path: '/new-event'),
+        RouteConfig(ManageTimelinesRoute.name, path: '/manage-timelines'),
+        RouteConfig(SettingsRoute.name, path: '/settings')
       ];
 }
 
@@ -76,4 +86,21 @@ class CreateEventRoute extends PageRouteInfo<void> {
   const CreateEventRoute() : super(CreateEventRoute.name, path: '/new-event');
 
   static const String name = 'CreateEventRoute';
+}
+
+/// generated route for
+/// [ManageTimelinesPage]
+class ManageTimelinesRoute extends PageRouteInfo<void> {
+  const ManageTimelinesRoute()
+      : super(ManageTimelinesRoute.name, path: '/manage-timelines');
+
+  static const String name = 'ManageTimelinesRoute';
+}
+
+/// generated route for
+/// [SettingsPage]
+class SettingsRoute extends PageRouteInfo<void> {
+  const SettingsRoute() : super(SettingsRoute.name, path: '/settings');
+
+  static const String name = 'SettingsRoute';
 }

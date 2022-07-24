@@ -1,14 +1,17 @@
+import 'package:aholic/presentation/router/app_router.dart';
+import 'package:aholic/providers.dart';
 import 'package:aholic/theme/ahl_colors.dart';
 import 'package:aholic/widgets/ahl_button.dart';
 import 'package:aholic/widgets/ahl_icon_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class AhlDrawer extends StatelessWidget {
+class AhlDrawer extends ConsumerWidget {
   const AhlDrawer({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Drawer(
       backgroundColor: Colors.white,
       child: SafeArea(
@@ -99,7 +102,7 @@ class AhlDrawer extends StatelessWidget {
                 ),
               ),
             ),
-            Spacer(),
+            const Spacer(),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
               child: AhlButton(
@@ -108,13 +111,16 @@ class AhlDrawer extends StatelessWidget {
                 fillColor: AhlColors.primary20,
                 textColor: AhlColors.primary,
                 hoverBorderColor: Colors.white,
+                onTap: () => ref
+                    .read(appRouterProvider)
+                    .push(const ManageTimelinesRoute()),
               ),
             ),
             Container(
               height: 1,
               color: AhlColors.primary20,
             ),
-            Padding(
+            const Padding(
               padding: const EdgeInsets.all(8),
               child: AhlIconButton(
                 icon: Icons.settings,
